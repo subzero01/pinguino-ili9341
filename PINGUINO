@@ -1,0 +1,8 @@
+[PINGUINO]
+name = pinguino-ili9341
+author = Stephan Wolf
+arch = 8bit, 32bit
+repository = git@github.com:subzero01/pinguino-ili9341.git
+description = A example library for Pinguino Library Manager.
+url = https://github.com/subzero01/pinguino-ili9341/wiki
+version = 0.1
