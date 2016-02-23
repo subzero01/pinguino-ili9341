@@ -12,6 +12,9 @@
 #include "font.h"
 #include <math.h>
 
+#include <digitalw.c>
+#include <delay.c>
+
 /*******************************************************************************
  * Globale Variablen
  */
@@ -25,7 +28,7 @@ uint16_t global_cs = 0;
  * Initialisierung des Displays mit einer frei waehlbaren Hintergrundfarbe
  */
 
-void ili9341_init (uin16_t spi, uint16_t cs, uint16_t dc)
+void ili9341_init (uint16_t spi, uint16_t cs, uint16_t dc)
 {    
     global_spi = spi;
     global_dc = dc;
@@ -130,7 +133,7 @@ void ili9341_init (uin16_t spi, uint16_t cs, uint16_t dc)
     ili9341_send(LCD_DATA, 0x0F);
 
     ili9341_send(LCD_REG,  0x11); // Sleep out
-    msDelay(120);
+    Delayms(120);
     ili9341_send(LCD_REG, 0x2c);  
     ili9341_fill(global_bg_color);
     
@@ -145,12 +148,12 @@ void ili9341_init (uin16_t spi, uint16_t cs, uint16_t dc)
 void ili9341_send(bool dc, uint8_t value)
 {   
     /* register or data */
-    LCD_DC = dc;
+    digitalwrite(global_dc, dc?1:0);
 
     /* transmit via SPI */
-    LCD_CS = 0;
+    digitalwrite(global_cs,0);
     SPI_write(global_spi, value);
-    LCD_CS = 1;
+    digitalwrite(global_cs,1);
 }
 
 /*******************************************************************************
