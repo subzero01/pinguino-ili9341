@@ -1,2 +1,1 @@
-blinkLED blinkled_32#include <lib_template32.c>
 ili9341.init ili9341_init#include <ili9341.c>
